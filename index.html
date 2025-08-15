@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoCart – Sustainable Shopping Assistant</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" class="logo" aria-label="EcoCart Home">
+        <span class="logo-cart">🛒</span> <span class="logo-leaf">🌿</span> EcoCart
+      </a>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Search</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="product.html" class="active">Compare</a>
+      <a href="login.html" id="accountLink">Account</a>
+      <button id="themeToggle" class="btn small">Toggle Theme</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="fade-in">Shop smarter, greener.</h1>
+      <p class="fade-in delay-1">Find sustainable products, compare impact, and track your eco progress.</p>
+      <form id="searchForm" class="search-bar fade-in delay-2" role="search" aria-label="Product search">
+        <input id="q" name="q" type="search" placeholder="Search foods by name or brand (e.g., &quot;cereal&quot;, &quot;Milo&quot;)" required>
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="filters fade-in delay-3" aria-label="Sustainability filters">
+        <label><input type="checkbox" name="filter" value="organic"> Organic</label>
+        <label><input type="checkbox" name="filter" value="fair-trade"> Fair Trade</label>
+        <label><input type="checkbox" name="filter" value="recyclable"> Recyclable</label>
+        <label><input type="checkbox" name="filter" value="low-carbon"> Low Carbon</label>
+      </div>
+    </section>
+
+    <section>
+      <div id="resultsMeta" class="muted"></div>
+      <div id="results" class="grid"></div>
+      <div id="pager" class="pager"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© <span id="year"></span> EcoCart • Built for WDD Skills Assessment • <a href="dashboard.html">Dashboard</a></small>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/search.js"></script>
+</body>
+</html>

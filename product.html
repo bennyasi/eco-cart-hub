@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoCart – Product Detail & Compare</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/product-detail.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" class="logo" aria-label="EcoCart Home">
+        <span class="logo-cart">🛒</span> <span class="logo-leaf">🌿</span> EcoCart
+      </a>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Search</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="product.html" class="active">Compare</a>
+      <a href="login.html" id="accountLink">Account</a>
+      <button id="themeToggle" class="btn small">Toggle Theme</button>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <section>
+      <h2>Selected Product</h2>
+      <div id="selectedProduct" class="product-card">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <section>
+      <h2>Compare With</h2>
+      <form id="compareForm">
+        <select id="cmpQuery" aria-label="Select product to compare"></select>
+        <button class="btn" type="submit">Compare</button>
+      </form>
+      <div id="compareProduct" class="product-card" style="margin-top: 1rem;">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+    <section>
+      <h2>Comparison Summary</h2>
+      <div class="comparison-grid" id="comparisonGrid">
+        <!-- Side-by-side comparison -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <small>© <span id="year"></span> EcoCart</small>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module">
+    const products = [
+      {
+        code: "1234567890",
+        product_name: "Eco Oat Cereal",
+        brands: "GreenCo",
+        labels_tags: ["organic", "fair-trade"],
+        packaging: "Recyclable paper box",
+        nutrition_grades: "a",
+        countries: "Nigeria",
+        categories: "Cereals and cereal products",
+        nova_group: 2,
+        quantity: "500 g",
+        image_front_url: "images/eco_oat_cereal.png"
+      },
+      {
+        code: "2345678901",
+        product_name: "Eco Pure Honey",
+        brands: "Banose Ventures",
+        labels_tags: ["organic", "natural"],
+        packaging: "Glass jar",
+        nutrition_grades: "a",
+        countries: "Nigeria",
+        categories: "Honey and honey products",
+        nova_group: 1,
+        quantity: "250 ml",
+        image_front_url: "images/eco_pure_honey.png"
+      },
+      {
+        code: "3456789012",
+        product_name: "Eco Coconut Water",
+        brands: "FreshNature",
+        labels_tags: ["organic", "low-sugar"],
+        packaging: "Recyclable plastic bottle",
+        nutrition_grades: "b",
+        countries: "Nigeria",
+        categories: "Beverages, Coconut water",
+        nova_group: 1,
+        quantity: "330 ml",
+        image_front_url: "images/eco_coconut_water.png"
+      },
+      {
+        code: "4567890123",
+        product_name: "Eco Plantain Chips",
+        brands: "TropicalBites",
+        labels_tags: ["organic", "gluten-free"],
+        packaging: "Biodegradable bag",
+        nutrition_grades: "c",
+        countries: "Nigeria",
+        categories: "Snacks, Chips",
+        nova_group: 3,
+        quantity: "100 g",
+        image_front_url: "images/eco_plantain_chips.png"
+      },
+      {
+        code: "5678901234",
+        product_name: "Eco Brown Rice",
+        brands: "NatureHarvest",
+        labels_tags: ["organic", "wholegrain"],
+        packaging: "Recyclable paper sack",
+        nutrition_grades: "a",
+        countries: "Nigeria",
+        categories: "Rice and rice products",
+        nova_group: 1,
+        quantity: "1 kg",
+        image_front_url: "images/eco_brown_rice.png"
+      }
+    ];
+
+    const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+    function renderProductCard(product) {
+      const gradeClass = 'grade-' + product.nutrition_grades.toLowerCase();
+      return `
+        <img src="${product.image_front_url}" alt="${product.product_name}" />
+        <h3>${product.product_name}</h3>
+        <p><strong>Brand:</strong> ${product.brands}</p>
+        <p><strong>Quantity:</strong> ${product.quantity}</p>
+        <p><strong>Packaging:</strong> ${product.packaging}</p>
+        <p><strong>Nutrition Grade:</strong> 
+          <span class="nutrition-grade ${gradeClass}">
+            ${product.nutrition_grades.toUpperCase()}
+          </span>
+        </p>
+        <p><strong>Categories:</strong> ${product.categories}</p>
+        <p><strong>Sold in:</strong> ${product.countries}</p>
+        <p><strong>Nova Group:</strong> ${product.nova_group}</p>
+        <p><strong>Labels:</strong> ${product.labels_tags.map(l => capitalize(l)).join(', ')}</p>
+      `;
+    }
+
+    function showProduct(container, product) {
+      container.innerHTML = renderProductCard(product);
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedCode = urlParams.get('code') || products[0].code;
+
+    const selectedProductContainer = document.getElementById('selectedProduct');
+    const compareProductContainer = document.getElementById('compareProduct');
+    const comparisonGrid = document.getElementById('comparisonGrid');
+    const cmpQuerySelect = document.getElementById('cmpQuery');
+
+    function populateDropdown() {
+      cmpQuerySelect.innerHTML = '<option value="">-- Select product --</option>';
+      products.forEach(p => {
+        if(p.code !== selectedCode) {
+          const option = document.createElement('option');
+          option.value = p.code;
+          option.textContent = p.product_name;
+          cmpQuerySelect.appendChild(option);
+        }
+      });
+    }
+
+    function showComparison(p1, p2) {
+      comparisonGrid.innerHTML = `
+        <div class="product-card">
+          <h4>Selected Product</h4>
+          ${renderProductCard(p1)}
+        </div>
+        <div class="product-card">
+          <h4>Comparison Product</h4>
+          ${renderProductCard(p2)}
+        </div>
+      `;
+    }
+
+    const selectedProduct = products.find(p => p.code === selectedCode);
+    showProduct(selectedProductContainer, selectedProduct);
+    populateDropdown();
+
+    document.getElementById('compareForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cmpCode = cmpQuerySelect.value;
+      if (!cmpCode) {
+        alert('Please select a product to compare.');
+        return;
+      }
+      const compareProduct = products.find(p => p.code === cmpCode);
+      if (!compareProduct) {
+        alert('Selected product not found.');
+        return;
+      }
+      showProduct(compareProductContainer, compareProduct);
+      showComparison(selectedProduct, compareProduct);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

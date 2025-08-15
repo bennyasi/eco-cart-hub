@@ -1,0 +1,108 @@
+/* EcoCart Base Styles */
+:root{
+  --green:#2E7D32;
+  --white:#F1F8E9;
+  --brown:#5D4037;
+  --blue:#4FC3F7;
+  --text:#19212a;
+  --muted:#667085;
+  --card:#ffffff;
+  --shadow:0 10px 30px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:var(--white);
+  line-height:1.6;
+}
+body.dark{ background:#0f1419; color:#e6edf3; }
+img{max-width:100%;display:block}
+a{color:var(--green);text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:1rem}
+.container.narrow{max-width:640px}
+.site-header, .site-footer{background:#fff;box-shadow:var(--shadow)}
+.site-header{position:sticky;top:0;z-index:9}
+.site-header .brand{display:flex;align-items:center;padding:.75rem 1rem}
+.logo{font-family:'Roboto Slab', serif; font-weight:700; font-size:1.2rem; display:flex; gap:.35rem; align-items:center; color:var(--brown)}
+.logo-leaf{filter:hue-rotate(-20deg)}
+.nav{display:flex;gap:.75rem;align-items:center;padding:.5rem 1rem}
+.nav a{padding:.4rem .7rem;border-radius:999px}
+.nav a.active,.nav a:hover{background:rgba(46,125,50,.1)}
+.btn{background:var(--green);color:#fff;border:none;padding:.6rem 1rem;border-radius:12px;cursor:pointer;box-shadow:var(--shadow);transition:transform .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--green);border:1px solid var(--green)}
+.btn.small{padding:.35rem .7rem;border-radius:10px;box-shadow:none}
+.hero{padding:3rem 0 1rem}
+.hero h1{font-family:'Roboto Slab', serif; font-size:clamp(2rem,5vw,3rem);margin:0}
+.fade-in{opacity:0;transform:translateY(8px);animation:fade .7s forwards}
+.delay-1{animation-delay:.2s}.delay-2{animation-delay:.4s}.delay-3{animation-delay:.6s}
+@keyframes fade{to{opacity:1;transform:none}}
+.search-bar{display:flex;gap:.5rem;margin-top:1rem}
+.search-bar input{flex:1;padding:.8rem;border-radius:12px;border:1px solid #d0d5dd}
+.filters{display:flex;gap:1rem;margin-top:.75rem;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.card .p{padding:1rem}
+.muted{color:var(--muted)}
+.row{display:flex;gap:.5rem;align-items:center}
+.row.wrap{flex-wrap:wrap}
+.gap{gap:.75rem}
+.stack{display:grid;gap:.75rem}
+.list{display:grid;gap:.5rem}
+.pager{display:flex;gap:.5rem;justify-content:center;margin:1rem 0}
+.pager button{padding:.5rem .8rem;border-radius:8px;border:1px solid #d0d5dd;background:#fff;cursor:pointer}
+.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.15rem .5rem;border-radius:999px;font-size:.8rem;border:1px solid #d0d5dd}
+.badge.leaf{border-color:var(--green)}
+.rating{display:flex;gap:.15rem;align-items:center}
+.leaf{filter: hue-rotate(-20deg)}
+.toast{position:fixed;bottom:1rem;right:1rem;background:#111;color:#fff;padding:.6rem .8rem;border-radius:10px;opacity:0;transform:translateY(10px);transition:.2s}
+.toast.show{opacity:1;transform:none}
+/* Hover card animation */
+.card:hover{transform:translateY(-4px);transition:transform .2s ease}
+/* Dark theme overrides */
+body.dark .card{background:#121a22}
+body.dark .nav a:hover, body.dark .nav a.active{background:rgba(79,195,247,.15)}
+/* product-detail.css */
+
+/* Extra styling for comparison */
+.comparison-grid {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.product-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  flex: 1 1 45%;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-radius: 6px;
+}
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+.nutrition-grade {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+  font-weight: bold;
+  color: white;
+}
+.grade-a { background-color: #4CAF50; }
+.grade-b { background-color: #8BC34A; }
+.grade-c { background-color: #FFC107; }
+.grade-d { background-color: #FF5722; }
+.grade-e { background-color: #F44336; }
+
+select#cmpQuery {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoCart – Dashboard</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" class="logo" aria-label="EcoCart Home">
+        <span class="logo-cart">🛒</span> <span class="logo-leaf">🌿</span> EcoCart
+      </a>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Search</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="product.html" class="active">Compare</a>
+      <a href="login.html" id="accountLink">Account</a>
+      <button id="themeToggle" class="btn small">Toggle Theme</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="grid two">
+      <article class="card p">
+        <h2>Weekly Eco Report</h2>
+        <ul class="stats">
+          <li><strong id="co2Saved">0</strong><span>kg CO₂ saved</span></li>
+          <li><strong id="waterSaved">0</strong><span>liters water saved</span></li>
+          <li><strong id="itemsRated">0</strong><span>items rated</span></li>
+        </ul>
+        <div class="muted" id="weekNote"></div>
+      </article>
+
+      <article class="card p">
+        <h2>Preferences</h2>
+        <form id="prefs">
+          <label>Theme
+            <select name="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </label>
+          <label>Country for context (REST Countries)
+            <input name="country" placeholder="Nigeria" value="Nigeria" />
+          </label>
+          <button class="btn">Save</button>
+        </form>
+        <div class="muted" id="countryMeta"></div>
+      </article>
+    </section>
+
+    <section class="grid two">
+      <article class="card p">
+        <h2>Saved Products</h2>
+        <div id="favorites" class="list"></div>
+      </article>
+
+      <article class="card p">
+        <h2>Community Forum</h2>
+        <form id="newPost" class="row wrap gap">
+          <input id="postText" placeholder="Share a tip or review…" required/>
+          <button class="btn" type="submit">Post</button>
+        </form>
+        <div id="posts" class="stack"></div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© <span id="year"></span> EcoCart</small>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

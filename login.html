@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EcoCart – Login</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <a href="index.html" class="logo" aria-label="EcoCart Home">
+        <span class="logo-cart">🛒</span> <span class="logo-leaf">🌿</span> EcoCart
+      </a>
+    </div>
+  </header>
+
+  <main class="container narrow">
+    <h1>Sign in</h1>
+    <p class="muted">Demo auth saves your session in LocalStorage. No server required.</p>
+
+    <form id="loginForm" class="card p">
+      <label>Email<br><input type="email" name="email" required></label>
+      <label>Password<br><input type="password" name="password" minlength="4" required></label>
+      <div class="row">
+        <button class="btn" type="submit">Sign in</button>
+        <button class="btn ghost" id="googleDemo" type="button">Sign in with Google (demo)</button>
+      </div>
+    </form>
+    <p><a href="index.html">Back to Search</a></p>
+  </main>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
